@@ -30,6 +30,12 @@ $app->url->setStaticSiteUrl($app->request->getSiteUrl());
 $app->url->setStaticBaseUrl($app->request->getBaseUrl());
 $app->url->setScriptName($app->request->getScriptName());
 
+// Inject $app into the view container for use in view files.
+$app->view->setApp($app);
+
+// Update view configuration with values from config file.
+$app->view->configure("view.php");
+
 // Update url configuration with values from config file.
 $app->url->configure("url.php");
 $app->url->setDefaultsFromConfiguration();
@@ -39,9 +45,3 @@ require ANAX_INSTALL_PATH . "/config/route.php";
 
 // Leave to router to match incoming request to routes
 $app->router->handle($app->request->getRoute());
-
-// Inject $app into the view container for use in view files.
-$app->view->setApp($app);
-
-// Update view configuration with values from config file.
-$app->view->configure("view.php");

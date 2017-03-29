@@ -1,47 +1,21 @@
 <?php
 
 $app->router->add("", function () use ($app) {
-    $urlHome  = $app->url->create("");
-    $urlAbout = $app->url->create("about");
-    $navbar = <<<EOD
-<navbar>
-    <a href="$urlHome">Home</a> |
-    <a href="$urlAbout">About</a>
-</navbar>
-EOD;
+    $app->view->add("me/header", ["title" => "Home"]);
+    $app->view->add("me/navbar");
+    $app->view->add("me/home");
+    $app->view->add("me/footer");
 
-    $body = <<<EOD
-<!doctype html>
-<meta charset="utf-8">
-<title>Home</title>
-$navbar
-<h1>Home</h1>
-<p>This is the homepage.</p>
-EOD;
-
-$app->response->setBody($body)
-          ->send();
+    $app->response->setBody([$app->view, "render"])
+                  ->send();
 });
 
 $app->router->add("about", function () use ($app) {
-    $urlHome  = $app->url->create("");
-    $urlAbout = $app->url->create("about");
-    $navbar = <<<EOD
-<navbar>
-    <a href="$urlHome">Home</a> |
-    <a href="$urlAbout">About</a>
-</navbar>
-EOD;
+    $app->view->add("me/header", ["title" => "Home"]);
+    $app->view->add("me/navbar");
+    $app->view->add("me/about");
+    $app->view->add("me/footer");
 
-    $body = <<<EOD
-<!doctype html>
-<meta charset="utf-8">
-<title>Home</title>
-$navbar
-<h1>About</h1>
-<p>This is the about page.</p>
-EOD;
-
-$app->response->setBody($body)
-          ->send();
+    $app->response->setBody([$app->view, "render"])
+                  ->send();
 });
